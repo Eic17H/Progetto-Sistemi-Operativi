@@ -1,0 +1,14 @@
+# ignora tutti
+*
+# disignora i file con estensione
+!*.*
+# ignora i file oggetto
+*.o
+# ignora .out
+*.out
+# disignora makefile
+!*makefile
+# disignora le cartelle
+!*/
+# altre estensioni che non conosco
+*.gch
