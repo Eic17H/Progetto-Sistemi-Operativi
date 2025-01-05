@@ -31,3 +31,21 @@ void movimentoCoccodrilli(Pos* pos){
     pos->x += vel.x;
     pos->y += vel.y;
 }
+
+int direzioneInputOrizzontale(){
+    int out = 0;
+    if(getch()==INPUT_DESTRA) out += 1;
+    if(getch()==INPUT_SINISTRA) out -= 1;
+    return out;
+}
+
+int direzioneInputVerticale(){
+    int out = 0;
+    if(getch()==INPUT_GIU) out += 1;
+    if(getch()==INPUT_SU) out -= 1;
+    return out;
+}
+
+bool pulsanteSalto(){
+    return (getch()==INPUT_SALTO);
+}
