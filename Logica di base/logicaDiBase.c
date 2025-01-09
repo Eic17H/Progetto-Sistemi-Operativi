@@ -1,4 +1,5 @@
-// Movimento della rana:
+// Movimento
+
 void movimentoRana(Pos* pos){
     Pos vel={0,0};
     bool staSaltando=false;
@@ -32,6 +33,8 @@ void movimentoCoccodrilli(Pos* pos){
     pos->y += vel.y;
 }
 
+// Tasti singoli
+
 int direzioneInputOrizzontale(){
     int out = 0;
     if(getch()==INPUT_DESTRA) out += 1;
@@ -48,4 +51,41 @@ int direzioneInputVerticale(){
 
 bool pulsanteSalto(){
     return (getch()==INPUT_SALTO);
+}
+
+// Check collisioni: ad ogni frame
+
+// Se la rana tocca un proiettile, perde
+void collisRanaProiettile(){
+    Proiettile* p = malloc(sizeof(Proiettile)); // proiettile che sto controllando
+    scorriLista(p, listaProiettiliCoccodrilliAttivi){
+        if(distanzaPos(p.pos, rana.pos) < RAGGIO_PROIETTILE_COCCODRILLO + RAGGIO_RANA){
+            perdi();
+            stopScorriLista();
+        }
+    }
+}
+
+// Se c'è una coppia di proiettili che si scontrano, eliminali
+void collisProiettileProiettile(){
+    Proiettile* p = malloc(sizeof(Proiettile)); // proiettile che sto controllando
+    Proiettile* r = malloc(sizeof(Proiettile)); // proiettile che sto controllando
+    scorriLista(p, listaProiettiliCoccodrilliAttivi){
+        scorriLista(r, listaProiettiliRanaAttivi){
+                if(distanzaPos(p.pos, r.pos) < RAGGIO_PROIETTILE_COCCODRILLO + RAGGIO_PROIETTILE_RANA){
+                elimina(p);
+                elimina(r);
+            }
+        }
+    }
+}
+
+// Se c'è almeno un coccodrillo su cui la rana si trova, non annega
+void ranaCadeInAcqua(){
+    Coccodrillo* c = malloc(sizeof(Coccodrillo));
+    scorrilista(c, listaCoccodrilliSuQuestaRiga){
+        if(distanzaPos(rana.pos, c.pos) < LARGHEZZA_COCCODRILLO/2+LARGHEZZA_RANA/2)
+            return false;
+    }
+    return true;
 }
