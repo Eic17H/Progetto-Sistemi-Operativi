@@ -81,7 +81,7 @@ void collisProiettileProiettile(){
 }
 
 // Se c'è almeno un coccodrillo su cui la rana si trova, non annega
-void ranaCadeInAcqua(){
+bool ranaCadeInAcqua(){
     Coccodrillo* c = malloc(sizeof(Coccodrillo));
     scorrilista(c, listaCoccodrilliSuQuestaRiga){
         if(distanzaPos(rana.pos, c.pos) < LARGHEZZA_COCCODRILLO/2+LARGHEZZA_RANA/2)
